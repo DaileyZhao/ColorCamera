@@ -1,0 +1,2 @@
+include ':camera'
+include ':core_library'
