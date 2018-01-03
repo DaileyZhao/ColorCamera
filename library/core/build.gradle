@@ -16,7 +16,6 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
 
-        testInstrumentationRunner  rootProject.ext.dependencies["androidJUnitRunner"]
 
     }
 
@@ -29,13 +28,13 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation (rootProject.ext.dependencies["okhttp"])
-    implementation (rootProject.ext.dependencies["rxjava2"])
-    implementation (rootProject.ext.dependencies["rxandroid2"])
-    implementation (rootProject.ext.dependencies["glide"])
-    testImplementation (rootProject.ext.dependencies["junit"])
-    androidTestImplementation (rootProject.ext.dependencies["runner"])
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api(rootProject.ext.dependencies["okhttp"])
+    api(rootProject.ext.dependencies["rxjava2"])
+    api(rootProject.ext.dependencies["rxandroid2"]) {
+        exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+    }
+    api(rootProject.ext.dependencies["glide"]) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 }

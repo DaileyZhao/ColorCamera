@@ -12,7 +12,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package com.zcm.library.customviews;
+package com.zcm.ui.customviews;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -27,7 +27,7 @@ import android.view.*;
 import android.widget.Scroller;
 
 
-import com.zcm.library.R;
+import com.zcm.ui.R;
 
 import java.lang.Math;
 import java.lang.Override;

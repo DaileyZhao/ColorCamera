@@ -1,4 +1,4 @@
-package com.zcm.library.basearch;
+package com.zcm.ui.basearch;
 
 import android.support.v7.app.AppCompatActivity;
 
