@@ -1,4 +1,9 @@
-apply plugin: 'com.android.application'
+/*
+  gradle 4.X新增的指令
+* implementation 该指令引用的库在其他module引用该库时其引用的库对module不可见 作为library使用时要注意
+* api 功能与compile一致，compile被标记为过时的指令*/
+apply plugin: 'com.android.library'
+
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -6,7 +11,6 @@ android {
 
 
     defaultConfig {
-        applicationId "com.zcm.camera"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -22,17 +26,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project (':library-ui')
-
+    implementation (rootProject.ext.dependencies["okhttp"])
+    implementation (rootProject.ext.dependencies["rxjava2"])
+    implementation (rootProject.ext.dependencies["rxandroid2"])
+    implementation (rootProject.ext.dependencies["glide"])
     testImplementation (rootProject.ext.dependencies["junit"])
     androidTestImplementation (rootProject.ext.dependencies["runner"])
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
