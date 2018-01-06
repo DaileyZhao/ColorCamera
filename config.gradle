@@ -72,6 +72,7 @@ ext{
             "photoview"                : "com.github.chrisbanes:PhotoView:1.2.5",
             "numberprogressbar"        : "com.daimajia.numberprogressbar:library:1.2@aar",
             "nineoldandroids"          : "com.nineoldandroids:library:2.4.0",
+            "swipeback"                : "com.github.liuguangqiang.swipeback:library:1.0.2@aar",
 
             //rx1
             "rxandroid"                : "io.reactivex:rxandroid:1.2.1",

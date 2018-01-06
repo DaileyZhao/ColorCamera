@@ -6,13 +6,16 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.zcm.ui.customviews.PieChart;
+import com.zcm.ui.basearch.BaseActivity;
+import com.zcm.ui.basearch.SwipeBackActivity;
+import com.zcm.ui.customview.PieChart;
+import com.zcm.ui.customview.SwipeBackLayout;
 
 /**
  * Created by zcm on 2017/12/29.
  */
 
-public class TestActivity extends AppCompatActivity {
+public class TestActivity extends SwipeBackActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,5 +35,7 @@ public class TestActivity extends AppCompatActivity {
                 pie.setCurrentItem(0);
             }
         });
+        setSwipeDragDirectMode(SwipeBackLayout.DragDirectMode.VERTICAL);
+        setEnableSwipe(true);
     }
 }

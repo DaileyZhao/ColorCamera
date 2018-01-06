@@ -12,7 +12,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package com.zcm.ui.customviews;
+package com.zcm.ui.customview;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -62,6 +62,10 @@ public class PieChart extends ViewGroup {
     private float mPointerRadius = 2.0f;
     private float mPointerX;
     private float mPointerY;
+
+    //记录上次滑动的坐标
+    private int mLastX = 0;
+    private int mLastY = 0;
 
     private int mPieRotation;
 
@@ -434,6 +438,25 @@ public class PieChart extends ViewGroup {
         return mData.size() - 1;
     }
 
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        int x = (int) ev.getX();
+        int y = (int) ev.getY();
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                getParent().requestDisallowInterceptTouchEvent(true);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                getParent().requestDisallowInterceptTouchEvent(false);
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
