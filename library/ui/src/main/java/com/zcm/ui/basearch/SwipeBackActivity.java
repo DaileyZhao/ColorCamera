@@ -34,7 +34,7 @@ public abstract class SwipeBackActivity extends BaseActivity implements SwipeBac
     }
 
     public void setDragEdge(SwipeBackLayout.DragEdge dragEdge) {
-        swipeBackLayout.setDragEdge(dragEdge);
+        getSwipeBackLayout().setDragEdge(dragEdge);
     }
 
     public SwipeBackLayout getSwipeBackLayout() {
