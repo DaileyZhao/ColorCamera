@@ -29,4 +29,5 @@
         <attr name="pointerRadius" format="dimension"/>
         <attr name="showText" format="boolean"/>
     </declare-styleable>
+    <attr name="enable" format="boolean" />
 </resources>

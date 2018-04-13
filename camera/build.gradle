@@ -15,10 +15,18 @@ android {
         testInstrumentationRunner  rootProject.ext.dependencies["androidJUnitRunner"]
 
     }
+    signingConfigs{
+        debug{
+
+        }
+        release{
+
+        }
+    }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

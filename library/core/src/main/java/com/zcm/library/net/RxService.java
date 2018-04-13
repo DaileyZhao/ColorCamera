@@ -41,9 +41,9 @@ public class RxService {
         okHttpClient=builder.build();
     }
 
-    private static RxService singleNet = null;
+    private volatile static RxService singleNet = null;
 
-    public static synchronized RxService getSingleTon() {
+    public static RxService getSingleTon() {
         if (singleNet == null) {
             synchronized (RxService.class) {
                 if (singleNet == null) {
