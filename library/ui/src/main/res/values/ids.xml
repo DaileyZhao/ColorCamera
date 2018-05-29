@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="view_skin_attr_extra_info" type="id" />
+    <item name="view_use_skin" type="id"/>
+</resources>

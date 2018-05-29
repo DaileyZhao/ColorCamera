@@ -1,2 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zcm.ui" />
+    package="com.zcm.ui" >
+    <application>
+        <activity android:name=".permission.PermissionsActivity"
+            android:theme="@style/AppTheme.NoActionBar.Permissions"/>
+    </application>
+</manifest>

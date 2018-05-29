@@ -2,11 +2,9 @@ package com.zcm.ui.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.pdf.PdfDocument;
 import android.net.http.SslError;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.webkit.GeolocationPermissions;
@@ -23,34 +21,36 @@ import android.webkit.WebViewClient;
  * 自定义可拓展的webView
  */
 
-public class CustomWebView extends WebView {
+public class H5WebView extends WebView {
     WebSettings webSettings;
     PageStatusListener pageStatusListener;
-    CommonWebChromeClient commonWebChromeClient;
-    CommonWebViewClient commonWebViewClient;
+    H5WebChromeClient h5WebChromeClient;
+    H5WebViewClient h5WebViewClient;
 
-    public CustomWebView(Context context) {
+    public H5WebView(Context context) {
         super(context);
         init();
     }
 
-    public CustomWebView(Context context, AttributeSet attrs) {
+    public H5WebView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public CustomWebView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public H5WebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
     private void init() {
-        webSettings = CustomWebView.this.getSettings();
-        commonWebChromeClient = new CommonWebChromeClient();
-        commonWebViewClient = new CommonWebViewClient();
-        this.setWebChromeClient(commonWebChromeClient);
-        this.setWebViewClient(commonWebViewClient);
+        webSettings = H5WebView.this.getSettings();
+        h5WebChromeClient = new H5WebChromeClient();
+        h5WebViewClient = new H5WebViewClient();
+        this.setWebChromeClient(h5WebChromeClient);
+        this.setWebViewClient(h5WebViewClient);
         webSettings.setAllowFileAccess(true);
+        webSettings.setJavaScriptEnabled(false);
+        webSettings.setDatabaseEnabled(true);
     }
 
     public void setPageStatusListener(PageStatusListener listener) {
@@ -79,7 +79,7 @@ public class CustomWebView extends WebView {
     /**
      * 辅助 WebView 处理 Javascript 的对话框,网站图标,网站标题等等
      */
-    class CommonWebChromeClient extends WebChromeClient {
+    class H5WebChromeClient extends WebChromeClient {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
@@ -116,7 +116,7 @@ public class CustomWebView extends WebView {
         }
     }
 
-    class CommonWebViewClient extends WebViewClient {
+    class H5WebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);

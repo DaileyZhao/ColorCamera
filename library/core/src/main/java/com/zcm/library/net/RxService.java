@@ -6,6 +6,7 @@ import android.os.Looper;
 
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Call;
 import okhttp3.OkHttpClient;
 
 /**
@@ -13,7 +14,7 @@ import okhttp3.OkHttpClient;
  */
 
 public class RxService {
-    public static final long DEFAULT_TIMEOUT=30000; //默认的超时时间
+    public static final long DEFAULT_TIMEOUT=30; //默认的超时时间
 
     private Application context; //全局上下文
     private Handler scheduler;  //切主线程调度器
@@ -24,14 +25,14 @@ public class RxService {
         mRetryCount=3;
         scheduler=new Handler(Looper.getMainLooper());
         OkHttpClient.Builder builder=new OkHttpClient.Builder();
-        HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
+        HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC);
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         builder.addInterceptor(loggingInterceptor);
 
-        builder.readTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS);
-        builder.writeTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS);
-        builder.connectTimeout(DEFAULT_TIMEOUT,TimeUnit.MILLISECONDS);
+        builder.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        builder.writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        builder.connectTimeout(DEFAULT_TIMEOUT,TimeUnit.SECONDS);
 
         builder.retryOnConnectionFailure(true);
 
@@ -41,23 +42,54 @@ public class RxService {
         okHttpClient=builder.build();
     }
 
-    private volatile static RxService singleNet = null;
+    private static class RxHolder{
+        private static RxService instance=new RxService();
+    }
 
     public static RxService getSingleTon() {
-        if (singleNet == null) {
-            synchronized (RxService.class) {
-                if (singleNet == null) {
-                    singleNet = new RxService();
-                }
-            }
-        }
-        return singleNet;
+        return RxHolder.instance;
     }
+
+    public RxService init(Application app){
+        context=app;
+        return this;
+    }
+
+    public RxService setOkHttpClient(OkHttpClient client){
+        this.okHttpClient=client;
+        return this;
+    }
+
+    public RxService setRetryCount(int retryCount){
+        mRetryCount=retryCount;
+        return this;
+    }
+
     public OkHttpClient getOkHttpClient(){
         if (okHttpClient==null) throw new NullPointerException("please set a OkHttpClient instance First!!!");
         return okHttpClient;
     }
-    public OkHttpClient.Builder getBuilder(){
-        return okHttpClient.newBuilder();
+
+    public void cancelTag(Object tag){
+        if (tag==null) return;
+        for (Call call:getOkHttpClient().dispatcher().queuedCalls()){
+            if (tag.equals(call.request().tag())){
+                call.cancel();
+            }
+        }
+        for (Call call:getOkHttpClient().dispatcher().runningCalls()){
+            if (tag.equals(call.request().tag())){
+                call.cancel();
+            }
+        }
+    }
+
+    public void cancelAll(){
+        for (Call call:getOkHttpClient().dispatcher().queuedCalls()){
+            call.cancel();
+        }
+        for (Call call:getOkHttpClient().dispatcher().runningCalls()){
+            call.cancel();
+        }
     }
 }
