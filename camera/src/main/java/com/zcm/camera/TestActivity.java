@@ -1,12 +1,9 @@
 package com.zcm.camera;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -38,12 +35,6 @@ public class TestActivity extends BaseActivity {
         imgSplash=findViewById(R.id.img_splash);
         httpRequest();
         handler=new Handler();
-        imgSplash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(TestActivity.this,ConnectActivity.class));
-            }
-        });
     }
     public void httpRequest(){
         Request request=new Request.Builder().url("http://api.huceo.com/meinv/?key=86a28560b4dd8234233b390691884b36&num=1").build();

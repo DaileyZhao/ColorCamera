@@ -1,6 +1,7 @@
 package com.zcm.library.net;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -16,7 +17,7 @@ import okhttp3.OkHttpClient;
 public class RxService {
     public static final long DEFAULT_TIMEOUT=30; //默认的超时时间
 
-    private Application context; //全局上下文
+    private Context context; //全局上下文
     private Handler scheduler;  //切主线程调度器
     private OkHttpClient okHttpClient;  //okhttp实例
     private int mRetryCount;   //重试次数
@@ -53,6 +54,11 @@ public class RxService {
     public RxService init(Application app){
         context=app;
         return this;
+    }
+
+    public Context getContext() {
+        if (context==null) throw new NullPointerException("context must not be null!");
+        return context;
     }
 
     public RxService setOkHttpClient(OkHttpClient client){
