@@ -1,7 +1,9 @@
 package com.zcm.ui.basearch;
 
 import android.app.Application;
+import android.view.Choreographer;
 
+import com.zcm.library.uimonitor.FPSFrameCallback;
 import com.zcm.library.uimonitor.LogMonitor;
 
 /**
@@ -15,6 +17,7 @@ public class BaseApplication extends Application{
         super.onCreate();
         CONTEXT=BaseApplication.this;
         LogMonitor.getInstance().writeMonitor();
+        Choreographer.getInstance().postFrameCallback(new FPSFrameCallback(System.nanoTime()));
     }
     public static Application getAPPcontext(){
         if (CONTEXT==null){

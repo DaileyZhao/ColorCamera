@@ -6,6 +6,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.util.Printer;
 
+import com.zcm.library.util.ReflectUtil;
+
 /**
  * Create by zcm on 2018/7/31 上午11:58
  * 一个检测UI线程卡顿的类。
@@ -44,6 +46,10 @@ public class LogMonitor {
     }
     public void removeMonitor(){
         mHandler.removeCallbacks(runnable);
+    }
+
+    public boolean isMonitor(){
+        return (boolean) ReflectUtil.invokeMethod(mHandler,"hasCallbacks",new Class[]{Runnable.class},new Object[]{runnable});
     }
 
     public void writeMonitor(){
