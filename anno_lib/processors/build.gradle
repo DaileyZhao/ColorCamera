@@ -1,0 +1,11 @@
+apply plugin: 'java-library'
+
+//AutoService注解处理器是Google开发的，用来生成 META-INF/services/javax.annotation.processing.Processor 文件的
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':annotation')
+    implementation (rootProject.ext.dependencies['auto-service'])
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

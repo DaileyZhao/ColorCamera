@@ -1,6 +1,10 @@
 include ':camera'
 include ':library-core'
 include ':library-ui'
+include ':processors'
+include ':annotation'
 
 project(':library-core').projectDir=new File(settingsDir,'library/core')
 project(':library-ui').projectDir=new File(settingsDir,'library/ui')
+project(':annotation').projectDir=new File(settingsDir,'anno_lib/annotation')
+project(':processors').projectDir=new File(settingsDir,'anno_lib/processors')
