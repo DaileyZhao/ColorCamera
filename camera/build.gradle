@@ -44,5 +44,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project (':library-ui')
+    annotationProcessor project(':processors')
+    implementation project (':annotation')
 
 }

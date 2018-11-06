@@ -1,7 +1,9 @@
 package com.zcm.processors;
 
 import com.google.auto.service.AutoService;
+import com.zcm.annotation.MyAnnotation;
 
+import java.util.Collections;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -42,7 +44,7 @@ public class MainProcessor extends AbstractProcessor{
      */
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return super.getSupportedAnnotationTypes();
+        return Collections.singleton(MyAnnotation.class.getCanonicalName());
     }
 
     /**
@@ -51,6 +53,6 @@ public class MainProcessor extends AbstractProcessor{
      */
     @Override
     public SourceVersion getSupportedSourceVersion() {
-        return super.getSupportedSourceVersion();
+        return SourceVersion.latest();
     }
 }

@@ -3,6 +3,7 @@ include ':library-core'
 include ':library-ui'
 include ':processors'
 include ':annotation'
+include ':Algorithm'
 
 project(':library-core').projectDir=new File(settingsDir,'library/core')
 project(':library-ui').projectDir=new File(settingsDir,'library/ui')
