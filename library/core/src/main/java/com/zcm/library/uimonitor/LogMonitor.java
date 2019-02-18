@@ -54,8 +54,8 @@ public class LogMonitor {
 
     public void writeMonitor(){
         Looper.getMainLooper().setMessageLogging(new Printer() {
-            private static final String START=">>>>> Dispatching";
-            private static final String END="<<<<< Finished";
+            private static final String START=">>>>> Dispatching to";
+            private static final String END="<<<<< Finished to";
             @Override
             public void println(String x) {
                 if (x.startsWith(START)){

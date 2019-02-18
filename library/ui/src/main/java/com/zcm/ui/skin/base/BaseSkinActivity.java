@@ -2,6 +2,7 @@ package com.zcm.ui.skin.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
@@ -25,7 +26,7 @@ import java.util.Map;
 /**
  * Created by zhy on 15/9/22.
  */
-public class BaseSkinActivity extends AppCompatActivity implements ISkinChangedListener {
+public class BaseSkinActivity extends FragmentActivity implements ISkinChangedListener {
     private static final Class<?>[] sConstructorSignature = new Class[]{
             Context.class, AttributeSet.class};
     private static final Map<String, Constructor<? extends View>> sConstructorMap

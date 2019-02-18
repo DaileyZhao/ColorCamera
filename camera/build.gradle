@@ -12,6 +12,11 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [eventBusIndex: 'com.zcm.camera.CommonEventBusIndex']
+            }
+        }
     }
 
     sourceSets.main {
@@ -45,6 +50,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project (':library-ui')
     annotationProcessor project(':processors')
+    annotationProcessor (rootProject.ext.dependencies["eventbus-apt"])
     implementation project (':annotation')
 
 }

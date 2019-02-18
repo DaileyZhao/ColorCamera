@@ -1,5 +1,6 @@
 package com.zcm.ui.basearch;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import com.zcm.ui.permission.PermissionsActivity;
 import com.zcm.ui.skin.base.BaseSkinActivity;
 import com.zcm.ui.systembar.SystemBarTintManager;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * Created by zcm on 2018/1/3.
  * 基类Activity，添加皮肤管理
@@ -21,16 +24,21 @@ import com.zcm.ui.systembar.SystemBarTintManager;
 
 public abstract class BaseActivity extends BaseSkinActivity {
     protected final String TAG=this.getClass().getSimpleName();
+    protected Activity mThisActivity=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        initSystemBarTint();
+        if (isSubscribedEvent()){
+            registerEventBus();
+        }
     }
 
     @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterEventBus();
     }
 
     /** 子类可以重写改变状态栏颜色 */
@@ -40,6 +48,10 @@ public abstract class BaseActivity extends BaseSkinActivity {
 
     /** 子类可以重写决定是否使用透明状态栏 */
     protected boolean translucentStatusBar() {
+        return false;
+    }
+
+    protected boolean isSubscribedEvent(){
         return false;
     }
 
@@ -78,6 +90,26 @@ public abstract class BaseActivity extends BaseSkinActivity {
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(setStatusBarColor());
         }
+    }
+
+    protected void registerEventBus(){
+        if (!EventBus.getDefault().isRegistered(mThisActivity)){
+            EventBus.getDefault().register(mThisActivity);
+        }
+    }
+
+    protected void unregisterEventBus(){
+        if (EventBus.getDefault().isRegistered(mThisActivity)){
+            EventBus.getDefault().unregister(mThisActivity);
+        }
+    }
+
+    protected void postEvent(Object event){
+        EventBus.getDefault().post(event);
+    }
+
+    public void postStickyEvent(Object event){
+        EventBus.getDefault().postSticky(event);
     }
 
     /**
