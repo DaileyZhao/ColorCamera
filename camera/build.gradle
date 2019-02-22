@@ -52,5 +52,6 @@ dependencies {
     annotationProcessor project(':processors')
     annotationProcessor (rootProject.ext.dependencies["eventbus-apt"])
     implementation project (':annotation')
+    annotationProcessor (rootProject.ext.dependencies["butterknife-compiler"])
 
 }

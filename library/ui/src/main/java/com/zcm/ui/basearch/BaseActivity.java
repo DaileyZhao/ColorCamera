@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -16,6 +17,9 @@ import com.zcm.ui.systembar.SystemBarTintManager;
 
 import org.greenrobot.eventbus.EventBus;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * Created by zcm on 2018/1/3.
  * 基类Activity，添加皮肤管理
@@ -23,14 +27,15 @@ import org.greenrobot.eventbus.EventBus;
  */
 
 public abstract class BaseActivity extends BaseSkinActivity {
-    protected final String TAG=this.getClass().getSimpleName();
-    protected Activity mThisActivity=this;
+    protected final String TAG = this.getClass().getSimpleName();
+    protected Activity mThisActivity = this;
+    protected Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        initSystemBarTint();
-        if (isSubscribedEvent()){
+        if (isSubscribedEvent()) {
             registerEventBus();
         }
     }
@@ -39,30 +44,59 @@ public abstract class BaseActivity extends BaseSkinActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterEventBus();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
     }
 
-    /** 子类可以重写改变状态栏颜色 */
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        unbinder = ButterKnife.bind(mThisActivity);
+    }
+
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+        unbinder=ButterKnife.bind(mThisActivity);
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        super.setContentView(view, params);
+        unbinder=ButterKnife.bind(mThisActivity);
+    }
+
+    /**
+     * 子类可以重写改变状态栏颜色
+     */
     protected int setStatusBarColor() {
         return getColorPrimary();
     }
 
-    /** 子类可以重写决定是否使用透明状态栏 */
+    /**
+     * 子类可以重写决定是否使用透明状态栏
+     */
     protected boolean translucentStatusBar() {
         return false;
     }
 
-    protected boolean isSubscribedEvent(){
+    protected boolean isSubscribedEvent() {
         return false;
     }
 
-    /** 获取主题色 */
+    /**
+     * 获取主题色
+     */
     public int getColorPrimary() {
         TypedValue typedValue = new TypedValue();
         getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
         return typedValue.data;
     }
 
-    /** 设置状态栏颜色 */
+    /**
+     * 设置状态栏颜色
+     */
     protected void initSystemBarTint() {
         Window window = getWindow();
         if (translucentStatusBar()) {
@@ -92,30 +126,30 @@ public abstract class BaseActivity extends BaseSkinActivity {
         }
     }
 
-    protected void registerEventBus(){
-        if (!EventBus.getDefault().isRegistered(mThisActivity)){
+    protected void registerEventBus() {
+        if (!EventBus.getDefault().isRegistered(mThisActivity)) {
             EventBus.getDefault().register(mThisActivity);
         }
     }
 
-    protected void unregisterEventBus(){
-        if (EventBus.getDefault().isRegistered(mThisActivity)){
+    protected void unregisterEventBus() {
+        if (EventBus.getDefault().isRegistered(mThisActivity)) {
             EventBus.getDefault().unregister(mThisActivity);
         }
     }
 
-    protected void postEvent(Object event){
+    protected void postEvent(Object event) {
         EventBus.getDefault().post(event);
     }
 
-    public void postStickyEvent(Object event){
+    protected void postStickyEvent(Object event) {
         EventBus.getDefault().postSticky(event);
     }
 
     /**
      * 设置状态栏沉浸式
      */
-    protected void setTranslucentStatus(){
+    protected void setTranslucentStatus() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             int flagTranslucentStatus = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
             int flagTranslucentNavigation = WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
@@ -136,10 +170,11 @@ public abstract class BaseActivity extends BaseSkinActivity {
 
     /**
      * 运行时权限权限申请函数
+     *
      * @param requestCode
      * @param permissions
      */
-    protected void requiredPermission(int requestCode, String... permissions){
-        PermissionsActivity.startActivityForResult(this,requestCode,permissions);
+    protected void requiredPermission(int requestCode, String... permissions) {
+        PermissionsActivity.startActivityForResult(this, requestCode, permissions);
     }
 }
