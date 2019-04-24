@@ -21,12 +21,14 @@ android {
 
     sourceSets.main {
         aidl.srcDirs = ['src/main/aidl']
+        res.srcDirs = ['src/main/res/',
+                       'src/main/skin-res']
     }
-    signingConfigs{
-        debug{
+    signingConfigs {
+        debug {
 
         }
-        release{
+        release {
 
         }
     }
@@ -48,10 +50,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project (':library-ui')
+    implementation project(':library-ui')
     annotationProcessor project(':processors')
-    annotationProcessor (rootProject.ext.dependencies["eventbus-apt"])
-    implementation project (':annotation')
-    annotationProcessor (rootProject.ext.dependencies["butterknife-compiler"])
+    annotationProcessor(rootProject.ext.dependencies["eventbus-apt"])
+    implementation project(':annotation')
+    annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"])
 
 }

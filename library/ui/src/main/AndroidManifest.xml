@@ -3,5 +3,6 @@
     <application>
         <activity android:name=".permission.PermissionsActivity"
             android:theme="@style/AppTheme.NoActionBar.Permissions"/>
+        <activity android:name=".widget.H5Activity"/>
     </application>
 </manifest>

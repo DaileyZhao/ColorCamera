@@ -11,8 +11,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.zcm.ui.R;
+import com.zcm.ui.changeskin.base.BaseSkinActivity;
 import com.zcm.ui.permission.PermissionsActivity;
-import com.zcm.ui.skin.base.BaseSkinActivity;
 import com.zcm.ui.systembar.SystemBarTintManager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -34,7 +34,7 @@ public abstract class BaseActivity extends BaseSkinActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        initSystemBarTint();
+        initSystemBarTint();
         if (isSubscribedEvent()) {
             registerEventBus();
         }
@@ -58,13 +58,13 @@ public abstract class BaseActivity extends BaseSkinActivity {
     @Override
     public void setContentView(View view) {
         super.setContentView(view);
-        unbinder=ButterKnife.bind(mThisActivity);
+        unbinder = ButterKnife.bind(mThisActivity);
     }
 
     @Override
     public void setContentView(View view, ViewGroup.LayoutParams params) {
         super.setContentView(view, params);
-        unbinder=ButterKnife.bind(mThisActivity);
+        unbinder = ButterKnife.bind(mThisActivity);
     }
 
     /**

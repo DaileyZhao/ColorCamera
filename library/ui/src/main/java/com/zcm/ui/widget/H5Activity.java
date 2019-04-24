@@ -13,12 +13,15 @@ import com.zcm.ui.widget.H5WebView.PageStatusListener;
 public class H5Activity extends BaseActivity implements PageStatusListener{
 
     H5WebView h5WebView;
+    String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.zcm.ui.R.layout.activity_h5_layout);
         h5WebView=findViewById(com.zcm.ui.R.id.h5_webview);
         h5WebView.setPageStatusListener(this);
+        url=getIntent().getStringExtra("H5Url");
+        h5WebView.loadUrl(url);
     }
 
     @Override
@@ -50,5 +53,11 @@ public class H5Activity extends BaseActivity implements PageStatusListener{
     public void onBackPressed() {
         super.onBackPressed();
         h5WebView.backPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        h5WebView.release();
     }
 }
