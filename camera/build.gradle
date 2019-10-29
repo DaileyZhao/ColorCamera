@@ -20,7 +20,6 @@ android {
     }
 
     sourceSets.main {
-        aidl.srcDirs = ['src/main/aidl']
         res.srcDirs = ['src/main/res/',
                        'src/main/skin-res']
     }

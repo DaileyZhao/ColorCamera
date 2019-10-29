@@ -1,11 +1,15 @@
 include ':camera'
 include ':library-core'
 include ':library-ui'
+include ':library-image'
+include ':library-camera'
 include ':processors'
 include ':annotation'
 include ':Algorithm'
 
-project(':library-core').projectDir=new File(settingsDir,'library/core')
-project(':library-ui').projectDir=new File(settingsDir,'library/ui')
-project(':annotation').projectDir=new File(settingsDir,'anno_lib/annotation')
-project(':processors').projectDir=new File(settingsDir,'anno_lib/processors')
+project(':library-core').projectDir = new File(settingsDir, 'library/core')
+project(':library-ui').projectDir = new File(settingsDir, 'library/ui')
+project(':library-image').projectDir = new File(settingsDir, 'library/image')
+project(':library-camera').projectDir = new File(settingsDir, 'library/camera')
+project(':annotation').projectDir = new File(settingsDir, 'anno_lib/annotation')
+project(':processors').projectDir = new File(settingsDir, 'anno_lib/processors')

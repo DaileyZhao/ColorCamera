@@ -1,5 +1,8 @@
 package com.java.datastructure;
 
+/**
+ * 二叉树
+ */
 public class BinaryTree {
     public class TreeNode<T>{
         T data;

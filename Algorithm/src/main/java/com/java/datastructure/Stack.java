@@ -45,7 +45,7 @@ public class Stack<E> {
     }
 
     public boolean isEmpty() {
-        return size() > 0 ? true : false;
+        return size() > 0;
     }
 
     public boolean isFull() {
