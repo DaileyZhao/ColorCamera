@@ -1,4 +1,4 @@
-package com.java.algorithm;
+package com.java.concurrent;
 
 /**
  * 生产者和消费者模型

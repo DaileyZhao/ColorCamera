@@ -1,4 +1,4 @@
-package com.java.algorithm;
+package com.java.concurrent;
 
 public class LockSync {
     public synchronized void addLock() {

@@ -2,6 +2,7 @@ package com.java.datastructure;
 
 /**
  * 链表
+ *
  * @param <E>
  */
 public class Linked<E> {
@@ -21,7 +22,7 @@ public class Linked<E> {
     }
 
     //双向链表
-    private class DoubleNode<T> {
+    private static class DoubleNode<T> {
         DoubleNode<T> prev;
         DoubleNode<T> next;
         T data;
@@ -31,11 +32,6 @@ public class Linked<E> {
             this.next = next;
             this.data = data;
         }
-    }
-
-    void checkPosition(int index) {
-        if (index <= 0 || index > size)
-            throw new IndexOutOfBoundsException();
     }
 
     public void insert(E element, int position) {
@@ -68,9 +64,28 @@ public class Linked<E> {
         return unlink(node(index));
     }
 
-    public E get(int index){
+    /**
+     * 修改其中的某一个节点的值
+     *
+     * @param value
+     * @param index
+     * @return
+     */
+    public E set(E value, int index) {
+        DoubleNode<E> node = node(index);
+        E oldValue = node.data;
+        node.data = value;
+        return oldValue;
+    }
+
+    public E get(int index) {
         checkPosition(index);
         return node(index).data;
+    }
+
+    void checkPosition(int index) {
+        if (index < 0 || index > size)
+            throw new IndexOutOfBoundsException();
     }
 
     E unlink(DoubleNode<E> node) {
@@ -115,5 +130,11 @@ public class Linked<E> {
             }
             return x;
         }
+    }
+
+    public static void main(String[] args) {
+        Linked<Character> linkedList = new Linked<>();
+        linkedList.insert('a', 0);
+        linkedList.remove(1);
     }
 }
