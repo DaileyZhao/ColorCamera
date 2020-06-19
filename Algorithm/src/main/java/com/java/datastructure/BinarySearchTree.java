@@ -6,10 +6,11 @@ package com.java.datastructure;
  * 左子树的所有节点的值均小于它的根节点的值，右子树的值均大于根节点的值
  * <p>
  * 遍历二叉树
- * 中序遍历：左子树-->根节点-->右子树
- * 前序遍历：根节点-->左子树——>右子树
- * 后序遍历：左子树-->右子树-->根节点
+ * 中序遍历：左子树-->根节点-->右子树 LCR
+ * 前序遍历：根节点-->左子树——>右子树 CLR
+ * 后序遍历：左子树-->右子树-->根节点 LRC
  *
+ * @author zcm
  */
 public class BinarySearchTree implements Tree {
     TreeNode root;

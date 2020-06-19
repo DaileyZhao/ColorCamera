@@ -11,7 +11,7 @@ public class Linked<E> {
     DoubleNode<E> tail;
 
     //单向链表
-    private class SingleNode<T> {
+    private static class SingleNode<T> {
         SingleNode<T> next;
         T data;
 
