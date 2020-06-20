@@ -142,3 +142,4 @@
     @org.greenrobot.eventbus.Subscribe <methods>;
 }
 -keep enum org.greenrobot.eventbus.ThreadMode { *; }
+-keep public class * implements com.zcm.library.base.ApplicationLifecycleCallbacks
