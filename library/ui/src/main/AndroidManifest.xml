@@ -1,8 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zcm.ui" >
+    package="com.zcm.ui">
+
     <application>
-        <activity android:name=".permission.PermissionsActivity"
-            android:theme="@style/AppTheme.NoActionBar.Permissions"/>
-        <activity android:name=".widget.H5Activity"/>
+        <meta-data
+            android:name="Module_Application"
+            android:value="com.zcm.ui.basearch.UiApplication" />
+
+        <activity
+            android:name=".permission.PermissionsActivity"
+            android:theme="@style/AppTheme.NoActionBar.Permissions" />
+        <activity android:name=".widget.H5Activity" />
     </application>
 </manifest>

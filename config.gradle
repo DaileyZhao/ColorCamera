@@ -49,6 +49,7 @@ ext{
             // Dalvik Executable (DEX)
             "multidex"                 : "com.android.support:multidex:1.0.3",
             "multidex-instrumentation" : "com.android.support:multidex-instrumentation:1.0.1",
+            "boostMultidex"            : "com.bytedance.boost_multidex:boost_multidex:1.0.1",
             //network
             "retrofit"                 : "com.squareup.retrofit2:retrofit:${version["retrofitSdkVersion"]}",
             "retrofit-converter-gson"  : "com.squareup.retrofit2:converter-gson:${version["retrofitSdkVersion"]}",
